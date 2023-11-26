@@ -47,3 +47,8 @@ body {
 #equal {
     width: 210px;
 }
+
+#display {
+    font-size: 40px;
+    padding: 0px 10px;
+}
