@@ -1,21 +1,37 @@
 let firstNumber;
 let secondNumber;
-const screen = document.querySelector('#display');
+const display1 = document.querySelector('#display1');
+const display2 = document.querySelector('#display2');
 const numbers = document.querySelectorAll('.number');
-const operators = document.querySelectorAll('.op')
+const operators = document.querySelectorAll('.op');
 let display = '';
 
 numbers.forEach(number => {
     number.addEventListener('click', ()=>{
-        if (screen.textContent === '0' && number.textContent === '0') {
-            screen.textContent = '0';
+        if (!display2.textContent){
+            if (display1.textContent === '0' && number.textContent === '0') {
+                display1.textContent = '0';
+            }
+            else {
+                display += number.textContent;
+                display1.textContent = display;
+            }
         }
         else {
-            display += number.textContent;
-            screen.textContent = display;
-        }
+            display1.textContent = number.textContent;
+        }       
+        firstNumber = display;
     })
 })
+
+operators.forEach(operator => {
+    operator.addEventListener('click', ()=>{
+        display2.textContent = firstNumber + operator.textContent;
+        display1.textContent = firstNumber;
+    })
+})
+
+
 
 
 function add(a, b) {
