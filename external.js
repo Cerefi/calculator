@@ -4,6 +4,8 @@ const display1 = document.querySelector('#display1');
 const display2 = document.querySelector('#display2');
 const numbers = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.op');
+const equal = document.querySelector('#equal');
+const clear = document.querySelector('#clear');
 let display = '';
 
 numbers.forEach(number => {
@@ -26,16 +28,28 @@ numbers.forEach(number => {
 
 operators.forEach(operator => {
     operator.addEventListener('click', ()=>{
+        firstNumber = display1.textContent;
         display2.textContent = firstNumber + operator.textContent;
         display1.textContent = firstNumber;
+        op = operator.textContent;
     })
 })
 
+equal.addEventListener('click', ()=>{
+    secondNumber = display1.textContent;
+    display2.textContent = firstNumber + op + secondNumber + '=';
+    display1.textContent = operate(firstNumber, secondNumber, op);
+    firstNumber = display1.textContent;
+})
 
-
+clear.addEventListener('click', ()=>{
+    display2.textContent = '';
+    display1.textContent = '0';
+    display = '';
+})
 
 function add(a, b) {
-    return a + b;
+    return +a + +b;
 }
 
 function subtract(a, b) {
@@ -52,15 +66,15 @@ function divide(a, b) {
 
 function operate(x, y, op) {
     if (op === '+'){
-        add(x, y);
+        return add(x, y);
     }
     else if (op === '-') {
-        subtract(x, y);
+        return subtract(x, y);
     }
-    else if (op === '*') {
-        multiply(x, y);
+    else if (op === 'x') {
+        return multiply(x, y);
     }
     else {
-        divide(x, y);
+        return divide(x, y);
     }
 }
