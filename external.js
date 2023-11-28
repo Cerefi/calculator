@@ -7,22 +7,25 @@ const operators = document.querySelectorAll('.op');
 const equal = document.querySelector('#equal');
 const clear = document.querySelector('#clear');
 let display = '';
+let temp = '';
 
 numbers.forEach(number => {
     number.addEventListener('click', ()=>{
-        if (!display2.textContent){
+        if (display2.textContent === ''){
             if (display1.textContent === '0' && number.textContent === '0') {
                 display1.textContent = '0';
             }
             else {
                 display += number.textContent;
                 display1.textContent = display;
+                firstNumber = display;
             }
         }
         else {
-            display1.textContent = number.textContent;
+            display = display1.textContent;
+            display1.textContent = temp + number.textContent;
+            temp = display1.textContent;
         }       
-        firstNumber = display;
     })
 })
 
@@ -36,16 +39,23 @@ operators.forEach(operator => {
 })
 
 equal.addEventListener('click', ()=>{
-    secondNumber = display1.textContent;
-    display2.textContent = firstNumber + op + secondNumber + '=';
-    display1.textContent = operate(firstNumber, secondNumber, op);
-    firstNumber = display1.textContent;
+    if (!display2.textContent){
+        
+    }
+    else {
+        secondNumber = display1.textContent;
+        display2.textContent = firstNumber + op + secondNumber + '=';
+        display1.textContent = operate(firstNumber, secondNumber, op);
+        temp = '';
+        on_off = 1;
+    }
 })
 
 clear.addEventListener('click', ()=>{
     display2.textContent = '';
     display1.textContent = '0';
     display = '';
+    temp = '';
 })
 
 function add(a, b) {
